@@ -1,46 +1,45 @@
 import React from "react";
 import { IndianRupee } from "lucide-react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
-interface Product {
-  name: string;
-  imageUrl: string;
-  location: string;
-  price: number;
-}
-
-function MachineCard({ product }: { product: Product }) {
+const MachineCard = ({ product }) => {
   return (
-    <Card className="w-[42vw] md:w-[23vw] mr-3 lg:mr-[6px] border-none shadow-none flex-shrink-0">
-      <Link href={`/artisan/rentalMachines/${product.name}`}>
-        <CardHeader className="h-[30vh] md:h-[65vh] w-full relative overflow-hidden">
+    // <Link href={`/artisan/rentalMachines/${product.id}`} className="block">
+    <Link href={`/potterywheel`} className="block">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105">
+        <div className="relative w-full h-48">
           <Image
             src={product.imageUrl}
-            fill={true}
-            className="object-cover rounded-sm transition-transform duration-500 hover:scale-110"
-            alt={product.name}
+            alt={product.title}
+            layout="fill"
+            objectFit="cover"
           />
-        </CardHeader>
-
-        <CardContent className="flex flex-col items-start text-left w-full p-1">
-          <h4 className="scroll-m-20 text-sm md:text-lg font-normal tracking-tight">
-            {product.name}
-          </h4>
-          <p className="scroll-m-20 text-[0.6rem] md:text-sm font-extralight tracking-tight text-black">
-            {product.location}
+        </div>
+        <div className="p-4">
+          <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+          {product.artisan && (
+            <p className="text-sm text-gray-600 mb-2">{product.artisan.name}</p>
+          )}
+          <p className="text-sm text-gray-800 mb-4">
+            {product.description.substring(0, 100)}...
           </p>
-          <span className="w-full flex items-center">
-            <IndianRupee size={16} strokeWidth={2} />
-            <h2 className="scroll-m-20 text-base md:text-xl font-medium lg:font-semibold tracking-tight text-left w-full">
-              {product.price}
-            </h2>
-          </span>
-        </CardContent>
-      </Link>
-    </Card>
+          <div className="flex justify-between items-center">
+            <span className="text-lg font-bold">₹{product.price}/day</span>
+            <span className="text-sm text-blue-600">View Details</span>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
-}
+};
 
 export default MachineCard;

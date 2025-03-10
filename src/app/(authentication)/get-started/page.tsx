@@ -1,37 +1,79 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import ProductCarousel from "@/components/custom/ProductCarousel";
 
 export default function GetStarted() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6">
-      <Image src={"/odopLogo.png"} width={200} height={100} className="mb-8" alt="odopLogo" />
-
-      <div className="flex flex-col items-center justify-center">
-        <div className="w-full h-[400px] bg-slate-500 my-4"></div>
-
-        <div className="flex items-center justify-center space-x-4 my-4">
-          <div className="w-2 h-4 bg-primary rounded-full"></div>
-          <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
-          <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
+    <main className="h-screen flex">
+      {/* Left section */}
+      <div className="w-1/2 bg-slate-100 p-8 flex flex-col items-center justify-center">
+        <Image
+          src="/odopLogo.png"
+          width={200}
+          height={100}
+          alt="ODOP Logo"
+          className="mb-8"
+        />
+        <h2 className="text-2xl text-slate-600 mb-8 text-center">
+          Welcome to the Unified Marketplace
+        </h2>
+        <div className="flex-grow w-full flex items-center justify-center">
+          <ProductCarousel />
         </div>
-
-        <h3 className="scroll-m-20 text-2xl font-bold tracking-tight text-primary mb-2">Unified Marketplace</h3>
-        <p className="text-center text-sm w-[90%] text-slate-500">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-        </p>
       </div>
 
-      <Link href={"/onboarding"} className="w-full">
-        <Button className="w-full py-8 text-lg mt-8">Get Started</Button>
-      </Link>
+      {/* Right section */}
+      <div className="w-1/2 bg-white rounded-l-3xl shadow-lg p-8 flex flex-col justify-center">
+        <h1 className="scroll-m-20 text-4xl mb-6 font-bold tracking-tight text-primary">
+          Get Started
+        </h1>
+        <p className="text-lg text-slate-600 mb-8">
+          Join our platform to explore a world of opportunities and connect with
+          global markets.
+        </p>
 
-      <Link href={"/login"} className="w-full">
-        <Button className="w-full py-8 text-lg mt-2" variant="outline">
-          I already have an account
-        </Button>
-      </Link>
+        <div className="space-y-6 mb-8">
+          <div className="flex items-center">
+            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+              1
+            </div>
+            <p className="text-lg">Create your account</p>
+          </div>
+          <div className="flex items-center">
+            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+              2
+            </div>
+            <p className="text-lg">Set up your profile</p>
+          </div>
+          <div className="flex items-center">
+            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+              3
+            </div>
+            <p className="text-lg">Start exploring the marketplace</p>
+          </div>
+        </div>
+
+        <Link href="/onboarding" className="w-full">
+          <Button className="w-full py-6 text-lg rounded-lg">
+            Get Started
+          </Button>
+        </Link>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-slate-500 mb-2">
+            Already have an account?
+          </p>
+          <Link href="/login" className="w-full">
+            <Button
+              variant="outline"
+              className="w-full py-6 text-lg rounded-lg"
+            >
+              Log In
+            </Button>
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }

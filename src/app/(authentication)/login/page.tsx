@@ -10,15 +10,27 @@ export default function Login() {
     contactNumber: "",
   });
 
-  const handleInputChange = (e) => {
+  interface FormInputEvent extends React.ChangeEvent<HTMLInputElement> {
+    target: HTMLInputElement;
+  }
+
+  interface FormData {
+    contactNumber: string;
+  }
+
+  const handleInputChange = (e: FormInputEvent): void => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormData((prevData: FormData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  interface FormSubmitEvent extends React.FormEvent<HTMLFormElement> {
+    preventDefault: () => void;
+  }
+
+  const handleSubmit = (e: FormSubmitEvent): void => {
     e.preventDefault();
     console.log(formData);
     // Handle form submission

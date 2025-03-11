@@ -76,15 +76,7 @@ export default function Sidebar() {
         {/* Add overflow-hidden here */}
         <div className="flex items-center justify-between px-4 pb-2">
           <Link href="/">
-            <Image
-              src="/logowhite.png"
-              width={expanded ? 100 : 0}
-              height={10}
-              className={`transition-all ${
-                expanded ? "block" : "hidden"
-              } cursor-pointer`}
-              alt="Logo"
-            />
+            <h1 className="text-2xl text-white mb-4 font-bold">Karigar</h1>
           </Link>
           <button
             onClick={() => setExpanded((curr) => !curr)}

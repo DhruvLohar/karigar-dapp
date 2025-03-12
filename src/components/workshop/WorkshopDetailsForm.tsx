@@ -16,6 +16,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Slider } from "@/components/ui/slider"
 import { Badge } from "@/components/ui/badge"
 import { formSchema } from "./schema"
+import { WORKSHOP_TYPES, WORKSHOP_LEVELS } from "@/constants"
 
 const workshopTypes = [
   { value: "pottery", label: "Pottery" },
@@ -36,11 +37,22 @@ export function WorkshopDetailsForm({ onSubmit }: WorkshopDetailsFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      materials: "",
-      duration: 2,
-      includeTakeHome: false,
+      title: "Introduction to Crafting",
+      description: "A comprehensive hands-on workshop perfect for beginners looking to start their crafting journey. Learn essential techniques and create your first piece.",
+      workshopType: workshopTypes[0].value, // "pottery"
+      workshopLevel: "beginner",
+      date: (() => {
+        const date = new Date();
+        date.setDate(date.getDate() + 14); // 2 weeks from now based on pre-workshop preparation
+        return date;
+      })(),
+      duration: 3, // 3 hours (15min + 30min + 2hr + 15min from timeline)
+      address: "Artisan Studio Workshop Space",
+      price: "100", // Middle of suggested range $85-120
+      materials: "Basic tool kit, Raw materials, Protective equipment, Handouts, Reference materials",
+      maxParticipants: "12", // Good size for U-shaped seating arrangement
+      teachingMethod: "combined", // Based on demonstration + hands-on practice in timeline
+      includeTakeHome: true, // Based on mentions of participants' creations
     },
   })
 

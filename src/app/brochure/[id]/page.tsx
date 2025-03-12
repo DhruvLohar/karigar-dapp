@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import Image from "next/image";
 import { Share } from "lucide-react";
@@ -64,19 +64,93 @@ const ODOPBrochure = () => {
       <div className="fixed bottom-4 right-4">
         <Button
           onClick={() => setIsDialogOpen(true)}
-          className="bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition"
+          className="bg-blue-950 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition"
         >
           <Share className="w-8 h-8" />
         </Button>
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <div className="flex flex-col items-center">
-            <Image src="/twitter-logo.png" alt="Twitter" width={50} height={50} />
-            <Button onClick={handleShare} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-              Share on Twitter
-            </Button>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-center text-xl font-bold mb-4">Share with your network</DialogTitle>
+          </DialogHeader>
+
+          <div className="grid grid-cols-1 gap-4 p-4">
+            {/* Twitter sharing option */}
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+              <div className="flex items-center">
+                <div className="w-10 h-10 flex items-center justify-center bg-blue-400 rounded-full text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                  </svg>
+                </div>
+                <span className="ml-3 font-medium">Twitter</span>
+              </div>
+              <Button
+                onClick={() => handleShare()}
+                className="bg-blue-500 hover:bg-blue-600 text-white"
+              >
+                Share
+              </Button>
+            </div>
+
+            {/* WhatsApp sharing option */}
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+              <div className="flex items-center">
+                <div className="w-10 h-10 flex items-center justify-center bg-green-500 rounded-full text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                  </svg>
+                </div>
+                <span className="ml-3 font-medium">WhatsApp</span>
+              </div>
+              <Button
+                onClick={() => handleShare()}
+                className="bg-green-500 hover:bg-green-600 text-white"
+              >
+                Share
+              </Button>
+            </div>
+
+            {/* Reddit sharing option */}
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+              <div className="flex items-center">
+                <div className="w-10 h-10 flex items-center justify-center bg-orange-500 rounded-full text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="9" r="1"></circle>
+                    <path d="M8.21 13.89L7 23 12 20l5 3-1.21-9.12"></path>
+                  </svg>
+                </div>
+                <span className="ml-3 font-medium">Reddit</span>
+              </div>
+              <Button
+                onClick={() => handleShare()}
+                className="bg-orange-500 hover:bg-orange-600 text-white"
+              >
+                Share
+              </Button>
+            </div>
+
+            {/* Copy Link option */}
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+              <div className="flex items-center">
+                <div className="w-10 h-10 flex items-center justify-center bg-gray-500 rounded-full text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                </div>
+                <span className="ml-3 font-medium">Copy Link</span>
+              </div>
+              <Button
+                onClick={() => handleShare()}
+                className="bg-gray-500 hover:bg-gray-600 text-white"
+              >
+                Copy
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

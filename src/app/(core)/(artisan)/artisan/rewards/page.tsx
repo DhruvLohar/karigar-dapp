@@ -38,7 +38,7 @@ export default function RewardsPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">My Rewards</h1>
-        <div className="h-1 w-20 bg-blue-500 mx-auto rounded-full mb-6"></div> {/* Decorative line */}
+        <div className="h-1 w-20 bg-blue-950 mx-auto rounded-full mb-6"></div> {/* Decorative line */}
       </div>
 
       <div className="text-center mb-8">
@@ -48,7 +48,7 @@ export default function RewardsPage() {
 
       <div className="flex justify-center items-center mb-8">
         <h2 className="text-5xl font-bold text-blue-600">355.03</h2>
-        <div className="ml-3">
+        <div className="ml-3 flex">
           <p className="text-lg text-gray-600">Your Total Tokens</p>
           <Info className="ml-2 cursor-pointer text-gray-500 hover:text-blue-500 transition-colors" onClick={handleInfoClick} />
         </div>
@@ -60,11 +60,11 @@ export default function RewardsPage() {
           <p>Allocated tokens represent a predetermined quantity of tokens that are temporarily locked and will gradually become unlocked over time.</p>
         </div>
       )}
-
+      {/* 
       <div className="flex justify-center space-x-4 mb-8">
-        <Button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleSendClick}>Send</Button>
-        <Button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleReceiveClick}>Receive</Button>
-      </div>
+        <Button className="bg-blue-950 text-white px-4 py-2 rounded" onClick={handleSendClick}>Send</Button>
+        <Button className="bg-blue-950 text-white px-4 py-2 rounded" onClick={handleReceiveClick}>Receive</Button>
+      </div> */}
 
       <h2 className="text-2xl font-semibold mb-4">Recent Transactions</h2>
       <div className="bg-gray-100 p-4 rounded-lg shadow mb-4">
@@ -89,7 +89,7 @@ export default function RewardsPage() {
         </>
       )}
 
-      <Button className="w-full bg-blue-500 text-white py-2 rounded" onClick={handleLoadMore}>See All Transactions</Button>
+      <Button className="w-full bg-blue-950 text-white py-2 rounded" onClick={handleLoadMore}>See All Transactions</Button>
 
       {showReceiveModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -124,7 +124,7 @@ export default function RewardsPage() {
               onChange={(e) => setAddress(e.target.value)}
             />
             <div className="flex flex-col gap-2">
-              <Button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={() => toast.success("Tokens sent!")}>Send</Button>
+              <Button className="bg-blue-950 text-white px-4 py-2 rounded" onClick={() => toast.success("Tokens sent!")}>Send</Button>
               <Button className="bg-red-500 text-white px-4 py-2 rounded" onClick={() => setShowSendModal(false)}>Close</Button>
             </div>
           </div>

@@ -246,7 +246,7 @@ export default function ArtisanProfile({ params }: PageProps) {
             </Button>
           </div>
         </div>
-        <Tabs defaultValue="profile" className="mb-8">
+        <Tabs>
           <TabsList className="flex justify-center gap-8 bg-white p-1 border-b border-gray-300">
             <TabsTrigger
               value="profile"
@@ -255,25 +255,13 @@ export default function ArtisanProfile({ params }: PageProps) {
               Profile
             </TabsTrigger>
             <TabsTrigger
-              value="gallery"
-              className="data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-gray-900 px-4 py-2"
-            >
-              Product Gallery
-            </TabsTrigger>
-            <TabsTrigger
-              value="best-sellers"
-              className="data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-gray-900 px-4 py-2"
-            >
-              Best Sellers
-            </TabsTrigger>
-            <TabsTrigger
               value="reviews"
               className="data-[state=active]:border-b-2 data-[state=active]:border-black data-[state=active]:text-gray-900 px-4 py-2"
             >
               Reviews
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="profile">
+          <TabsContent value="profile" className="mt-6">
             <div className="grid gap-8 md:grid-cols-3 mt-12">
               <div className="md:col-span-2">
                 <h2 className="text-2xl font-bold mb-4 text-gray-900">
@@ -342,14 +330,6 @@ export default function ArtisanProfile({ params }: PageProps) {
                 </div>
               </div>
             </div>
-          </TabsContent>
-          <TabsContent value="gallery" className="mt-6">
-            <h2 className="text-2xl font-bold mb-4">Product Gallery</h2>
-            <ImageCollage individualCardData={mukeshChauhanData} />
-          </TabsContent>
-          <TabsContent value="best-sellers" className="mt-6">
-            <h2 className="text-2xl font-bold mb-4">Best Sellers</h2>
-            <ImageCollage individualCardData={mukeshChauhanData} />
           </TabsContent>
           <TabsContent value="reviews" className="mt-6">
             <div className="bg-white p-6 rounded-lg">

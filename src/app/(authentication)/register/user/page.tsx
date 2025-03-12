@@ -3,20 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { useState, ChangeEvent, FormEvent } from "react";
-
-interface FormDataType {
-  firstName: string;
-  lastName: string;
-  contactNumber: string;
-  state: string;
-  indian: string;
-  city: string;
-  district: string;
-}
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Register() {
-  const [formData, setFormData] = useState<FormDataType>({
+  const router = useRouter();
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     contactNumber: "",
@@ -26,7 +19,7 @@ export default function Register() {
     district: "",
   });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -34,10 +27,18 @@ export default function Register() {
     }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(formData);
-    // Handle form submission
+
+    // Check if all fields are filled
+    const allFieldsFilled = Object.values(formData).every((field) => field.trim() !== "");
+    if (!allFieldsFilled) {
+      toast.error("Please fill in all fields before continuing.");
+      return;
+    }
+
+    // Redirect to / with registered query parameter after successful registration
+    router.push("/?registered=true");
   };
 
   return (
@@ -117,7 +118,7 @@ export default function Register() {
               onChange={handleInputChange}
             />
           </div>
-          <Button className="w-full py-6 rounded-lg text-md mt-8" type="submit">
+          <Button type="submit" className="w-full py-6 text-lg">
             Continue
           </Button>
         </form>

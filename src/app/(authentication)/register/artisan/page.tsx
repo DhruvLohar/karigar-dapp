@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Register() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -36,8 +39,16 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(formData);
-    // Handle form submission
+
+    // Check if all fields are filled
+    const allFieldsFilled = Object.values(formData).every((field) => field.trim() !== "");
+    if (!allFieldsFilled) {
+      toast.error("Please fill in all fields before continuing.");
+      return;
+    }
+
+    // Redirect to /artisan/home after successful registration
+    router.push("/artisan/home");
   };
 
   return (

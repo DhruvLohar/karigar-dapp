@@ -464,7 +464,7 @@ function Page({ params }: PageProps) {
                   </p>
                   <Link
                     className=" py-2 px-12 bg-blue-950 text-white text-lg font-bold rounded-xl hidden lg:block"
-                    href={`/artisan/${product.artisan.name}`}
+                    href={`/karigar/${product.artisan.name}`}
                   >
                     Visit Profile
                   </Link>

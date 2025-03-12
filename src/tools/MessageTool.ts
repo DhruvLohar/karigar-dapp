@@ -1,4 +1,4 @@
-import { DynamicStructuredTool, DynamicTool, tool } from "@langchain/core/tools";
+import { DynamicStructuredTool, DynamicTool } from "@langchain/core/tools";
 import { aptosClient } from "@/utils/aptosClient";
 import { Account, Ed25519PrivateKey, PrivateKey, PrivateKeyVariants } from "@aptos-labs/ts-sdk";
 import { z } from "zod";
@@ -13,51 +13,6 @@ const privateKey = new Ed25519PrivateKey(
   )
 );
 const adminAccount = Account.fromPrivateKey({ privateKey });
-
-// Tool for adding messages
-// export const addMessage = tool(
-//   "add_message_tool",
-//   {
-//     description: `Adds a message to the on-chain message board. 
-//     Input should be the message content as a string.`,
-//     args: {
-//       message: {
-//         type: "string",
-//         description: "The text content to store on-chain"
-//       }
-//     }
-//   },
-//   async ({ message }: { message: string }) => {
-//     try {
-//       const client = aptosClient();
-//       const transaction = await client.transaction.build.simple({
-//         sender: adminAccount.accountAddress,
-//         data: {
-//           function: `${CONTRACT_ADDRESS}::message_board::post_message`,
-//           functionArguments: [message]
-//         }
-//       });
-
-//       const signedTxn = client.transaction.sign({
-//         signer: adminAccount,
-//         transaction,
-//       });
-
-//       const submittedTxn = await client.transaction.submit.simple({
-//         transaction,
-//         senderAuthenticator: signedTxn
-//       });
-
-//       await client.waitForTransaction({
-//         transactionHash: submittedTxn.hash
-//       });
-
-//       return `Message added successfully. Transaction hash: ${submittedTxn.hash}`;
-//     } catch (error) {
-//       return `Failed to add message: ${error instanceof Error ? error.message : "Unknown error"}`;
-//     }
-//   }
-// );
 
 export const viewMessageTool = new DynamicTool({
   name: "view_messages_tool",

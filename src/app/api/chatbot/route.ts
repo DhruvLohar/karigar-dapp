@@ -1,10 +1,10 @@
 import { addMessageTool, viewMessageTool } from "@/tools/MessageTool";
-import { Account, Aptos, AptosConfig, Ed25519PrivateKey, Network, PrivateKey, PrivateKeyVariants } from "@aptos-labs/ts-sdk";
+// import { Account, Aptos, AptosConfig, Ed25519PrivateKey, Network, PrivateKey, PrivateKeyVariants } from "@aptos-labs/ts-sdk";
 
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { MemorySaver } from "@langchain/langgraph"
 import { createReactAgent } from "@langchain/langgraph/prebuilt"
-import { AgentRuntime, LocalSigner, createAptosTools } from "move-agent-kit";
+// import { AgentRuntime, LocalSigner, createAptosTools } from "move-agent-kit";
 
 
 const llm = new ChatGoogleGenerativeAI({
@@ -13,28 +13,25 @@ const llm = new ChatGoogleGenerativeAI({
     apiKey: process.env.GEMINI_API_KEY, // Make sure to set this environment variable
 });
 
-export async function GET(request: Request) {
+export async function GET(_request: Request) {
 
-    // const { searchParams } = new URL(request.url);
-    // const addr: string = searchParams.get('address') || "";
+    // const config = new AptosConfig({
+    //     network: Network.TESTNET
+    // });
+    // const aptos = new Aptos(config);
 
-    const config = new AptosConfig({
-        network: Network.TESTNET
-    });
-    const aptos = new Aptos(config);
-
-    const account = Account.fromPrivateKey({
-        privateKey: new Ed25519PrivateKey(
-            PrivateKey.formatPrivateKey(
-                process.env.NEXT_MODULE_PUBLISHER_ACCOUNT_PRIVATE_KEY as string,
-                PrivateKeyVariants.Ed25519
-            )
-        ),
-    });
-    const signer = new LocalSigner(account, Network.TESTNET);
-    const aptosAgent = new AgentRuntime(signer, aptos, {
-        PANORA_API_KEY: process.env.PANORA_API_KEY,
-    })
+    // const account = Account.fromPrivateKey({
+    //     privateKey: new Ed25519PrivateKey(
+    //         PrivateKey.formatPrivateKey(
+    //             process.env.NEXT_MODULE_PUBLISHER_ACCOUNT_PRIVATE_KEY as string,
+    //             PrivateKeyVariants.Ed25519
+    //         )
+    //     ),
+    // });
+    // const signer = new LocalSigner(account, Network.TESTNET);
+    // const aptosAgent = new AgentRuntime(signer, aptos, {
+    //     PANORA_API_KEY: process.env.PANORA_API_KEY,
+    // })
     const tools = [
         // ...createAptosTools(aptosAgent)
         viewMessageTool,
@@ -46,7 +43,7 @@ export async function GET(request: Request) {
     const agent = createReactAgent({
         llm,
         tools,
-        // checkpointSaver: memory,
+        checkpointSaver: memory,
         //     messageModifier: `
         //     You are a helpful agent that can interact onchain using the Aptos Agent Kit. You are
         //     empowered to interact onchain using your tools. If you ever need funds, you can request them from the

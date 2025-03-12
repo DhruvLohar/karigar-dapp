@@ -17,6 +17,7 @@
     "fmt": "npm run _fmt -- --write"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
     "@aptos-labs/ts-sdk": "^1.30.0",
     "@aptos-labs/wallet-adapter-react": "^4.1.1",
     "@ducanh2912/next-pwa": "^10.2.9",

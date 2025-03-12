@@ -7,7 +7,7 @@ export async function POST(request: Request) {
         });
 
         const body = await request.json();
-        const { productDetails, trendyTweets, artisanName, location } = body;
+        const { productDetails, artisanName, location } = body;
 
         // Validate input
         if (!productDetails || !productDetails.name || !productDetails.description) {
@@ -16,11 +16,11 @@ export async function POST(request: Request) {
             });
         }
 
-        if (!Array.isArray(trendyTweets) || trendyTweets.length === 0) {
-            return new Response(JSON.stringify({ error: 'Trendy tweets must be a non-empty array' }), {
-                status: 400
-            });
-        }
+        // if (!Array.isArray(trendyTweets) || trendyTweets.length === 0) {
+        //     return new Response(JSON.stringify({ error: 'Trendy tweets must be a non-empty array' }), {
+        //         status: 400
+        //     });
+        // }
 
         const prompt = `
         I need a JSON brochure for an artisan's product with these details:
@@ -30,9 +30,6 @@ export async function POST(request: Request) {
         
         Artisan Name: ${artisanName || 'Unknown'}
         Location: ${location || 'Unknown'}
-        
-        Current trending tweets about similar products or in the same market:
-        ${JSON.stringify(trendyTweets, null, 2)}
         
         Please create a compelling brochure in JSON format that includes:
         1. artisanInfo (name, location, biography)

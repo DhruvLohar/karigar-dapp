@@ -7,7 +7,7 @@ export default function Hero() { // Added parentheses here
             {/* ... existing code ... */}
             <div className="pointer-events-none select-none">
                 <Image
-                    src="/ODOPLogo.png"
+                    src="/odopMain.jpeg"
                     alt="Description"
                     className="w-full h-[70vh] mt-10"
                     width={800} // Set the width you want

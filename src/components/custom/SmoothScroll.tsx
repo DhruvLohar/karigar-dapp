@@ -31,9 +31,6 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     };
   }, []);
 
-  useMotionValueEvent(scrollY, "change", (latest: number) => {
-    console.log("Page scroll: ", latest);
-  });
 
   return <>{children}</>;
 }

@@ -3,6 +3,7 @@ const fs = require("node:fs");
 
 const modules = [
   { address: process.env.NEXT_PUBLIC_MODULE_ADDRESS, name: "message_board" },
+  // { address: process.env.NEXT_PUBLIC_BROCHURE_MODULE_ADDRESS, name: "brochure_manager" },
   { address: "0x1", name: "coin" },
 ];
 

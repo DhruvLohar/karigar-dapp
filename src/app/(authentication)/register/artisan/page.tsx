@@ -16,15 +16,25 @@ export default function Register() {
     district: "",
   });
 
+  interface FormData {
+    firstName: string;
+    lastName: string;
+    contactNumber: string;
+    state: string;
+    indian: string;
+    city: string;
+    district: string;
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormData((prevData: FormData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     console.log(formData);
     // Handle form submission

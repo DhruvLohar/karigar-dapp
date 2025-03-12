@@ -3,10 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
+
+interface FormDataType {
+  firstName: string;
+  lastName: string;
+  contactNumber: string;
+  state: string;
+  indian: string;
+  city: string;
+  district: string;
+}
 
 export default function Register() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataType>({
     firstName: "",
     lastName: "",
     contactNumber: "",
@@ -16,7 +26,7 @@ export default function Register() {
     district: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -24,7 +34,7 @@ export default function Register() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
     // Handle form submission

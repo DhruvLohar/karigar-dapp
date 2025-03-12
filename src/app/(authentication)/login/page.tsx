@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 export default function Login() {
@@ -71,11 +70,9 @@ export default function Login() {
             value={formData.contactNumber}
             onChange={handleInputChange}
           />
-          <Link href={"/onboarding"}>
-            <Button className="w-full py-6 rounded-lg text-md mt-8" type="submit">
-              Login
-            </Button>
-          </Link>
+          <Button className="w-full py-6 rounded-lg text-md mt-8" type="submit">
+            Login
+          </Button>
         </form>
 
         <div className="mt-6 text-center">

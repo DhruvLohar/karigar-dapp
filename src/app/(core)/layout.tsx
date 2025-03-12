@@ -1,15 +1,11 @@
 "use client"
 import { usePathname } from 'next/navigation';
-import Sidebar from "@/components/custom/sidebar";
+import Sidebar from "@/components/custom/Sidebar";
 import Navbar from "@/components/custom/Navbar";
 import Footer from "@/components/custom/Footer";
 import SmoothScroll from "@/components/custom/SmoothScroll";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isArtisanPage = pathname.startsWith('/artisan');
 

@@ -3,18 +3,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { FormEvent, ChangeEvent, useState } from 'react';
 
 export default function ForgotPassword() {
-  const [email, setEmail] = useState<string>('');
+  interface FormSubmitEvent extends React.FormEvent<HTMLFormElement> {
+    preventDefault: () => void;
+  }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setEmail(e.target.value);
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (e: FormSubmitEvent): void => {
     e.preventDefault();
-    // ... existing code ...
+    // Add your forgot password logic here
   };
 
   return (
@@ -50,8 +47,6 @@ export default function ForgotPassword() {
             placeholder="Enter registered email here"
             className="py-6 text-lg"
             required
-            value={email}
-            onChange={handleInputChange}
           />
           <Button type="submit" className="w-1/2 py-6 text-lg">
             Submit

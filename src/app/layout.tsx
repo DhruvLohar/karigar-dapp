@@ -6,6 +6,7 @@ import { ReactQueryProvider } from "@/components/ReactQueryProvider";
 import { WalletProvider } from "@/components/WalletProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { WrongNetworkAlert } from "@/components/WrongNetworkAlert";
+import { Toaster as SonnerToaster } from "sonner";
 
 import "./globals.css";
 const poppins = Poppins({
@@ -40,6 +41,7 @@ export default function RootLayout({
             <div>{children}</div>
             <WrongNetworkAlert />
             <Toaster />
+            <SonnerToaster />
           </ReactQueryProvider>
         </WalletProvider>
       </body>

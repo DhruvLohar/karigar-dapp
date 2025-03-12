@@ -11,6 +11,7 @@ import {
   Clock,
   BookImage,
   MessageCircle,
+  Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -121,13 +122,13 @@ export default function ArtisanHomePage() {
           <QuickLink href="/artisan/brochure" icon={<BookImage />}>
             Create Brochure
           </QuickLink>
-          <ChatBotModal />
-          <QuickLink
-            href="/artisan/workshop/list"
-            icon={<School />}
-          >
+          <QuickLink href="/artisan/workshop/list" icon={<School />}>
             Initiate Workshop
           </QuickLink>
+          <QuickLink href="/artisan/rewards" icon={<Star />}>
+            My Rewards
+          </QuickLink>
+          <ChatBotModal />
         </div>
       </section>
 

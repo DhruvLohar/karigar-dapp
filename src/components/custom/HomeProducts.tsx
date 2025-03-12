@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Elsie_Swash_Caps } from 'next/font/google';
+import Link from 'next/link';
 
 const elsieSwashCaps = Elsie_Swash_Caps({
   subsets: ['latin'],
@@ -83,7 +84,7 @@ export default function HomeProducts() {
         ))}
       </div>
       <div className="text-right mt-4">
-        <a href="#" className="text-indigo-600 hover:underline">See more</a>
+        <Link href="/product/all" className="text-indigo-600 hover:underline">See more</Link>
       </div>
     </div>
   );

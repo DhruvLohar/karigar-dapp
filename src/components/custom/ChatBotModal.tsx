@@ -7,8 +7,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 
 interface Message {
   role: "user" | "assistant";
@@ -94,92 +96,50 @@ function ChatBotModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="fixed bottom-4 right-4 p-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 z-[9999]">
-          <MessageCircle size={24} />
-        </button>
+        <Button className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-sm border border-dori/10 hover:border-dori/40 hover:shadow-md transition-all w-full h-full">
+          <div className="p-3 mb-2 rounded-full bg-dori/10 text-dori">
+            <MessageCircle />
+          </div>
+          <span className="font-medium text-center">Chat with AI</span>
+        </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-md p-0 z-[99999]">
-        <DialogHeader className="p-4 border-b">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 flex justify-center items-center rounded-full bg-blue-300">
-              <Bot size={24} />
-            </div>
-            <DialogTitle>ChatBot Assistant</DialogTitle>
-          </div>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Chat with AI Assistant</DialogTitle>
+          <DialogDescription>
+            Ask me any questions about your artisan business, products, or marketing strategies.
+          </DialogDescription>
         </DialogHeader>
-
-        <div className="flex flex-col h-[70vh]">
-          <ScrollArea className="flex-1 p-4">
-            {messages.length === 0 ? (
-              <p className="text-center text-gray-500">No messages yet.</p>
-            ) : (
-              <div className="flex flex-col space-y-2">
-                {messages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`max-w-[80%] p-3 text-sm rounded-lg shadow break-words ${msg.role === "user"
-                      ? "bg-blue-600 text-white ml-auto"
-                      : "bg-white text-black mr-auto border"
-                      }`}
-                  >
-                    {msg.content}
-                  </div>
-                ))}
-                <div ref={messagesEndRef} />
-              </div>
-            )}
-          </ScrollArea>
-
-          <div className="p-4 border-t">
-            <div className="flex flex-wrap gap-1 mb-4">
-              {predefinedMessages.map((msg, index) => (
-                <button
-                  key={index}
-                  onClick={() => handlePillClick(msg)}
-                  className="border border-blue-300 text-blue-600 text-xs px-4 py-2 rounded-full hover:bg-blue-50"
-                >
-                  {msg}
-                </button>
-              ))}
+        <div className="border rounded-md p-4 h-80 overflow-y-auto bg-gray-50">
+          {messages.length === 0 ? (
+            <div className="text-center text-gray-500 mt-24">
+              Start a conversation with the AI assistant
             </div>
-
-            <form className="flex items-center gap-2" onSubmit={handleSubmit}>
-              <input
-                type="file"
-                ref={fileInputRef}
-                className="hidden"
-                onChange={handleFileUpload}
-              />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="p-2 text-gray-600 hover:text-gray-800"
-              >
-                <Paperclip size={20} />
-              </button>
-              <button
-                type="button"
-                onClick={toggleRecording}
-                className={`p-2 ${isRecording ? "text-red-500" : "text-gray-600 hover:text-gray-800"
-                  }`}
-              >
-                <Mic size={20} />
-              </button>
-              <input
-                className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                type="text"
-                placeholder="Type your message..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="p-2 text-blue-600 hover:text-blue-700"
-              >
-                <Send size={20} />
-              </button>
-            </form>
-          </div>
+          ) : (
+            <div className="flex flex-col space-y-2">
+              {messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`max-w-[80%] p-3 text-sm rounded-lg shadow break-words ${msg.role === "user"
+                    ? "bg-blue-600 text-white ml-auto"
+                    : "bg-white text-black mr-auto border"
+                    }`}
+                >
+                  {msg.content}
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+          )}
+        </div>
+        <div className="flex mt-4">
+          <input
+            className="flex-1 rounded-l-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-dori"
+            placeholder="Type your message..."
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <Button className="rounded-l-none">Send</Button>
         </div>
       </DialogContent>
     </Dialog>

@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2, Upload, FileText, Image as ImageIcon } from "lucide-react";
+import axios from 'axios';
 
 const CreateBrochure = () => {
   const router = useRouter();
@@ -25,6 +26,29 @@ const CreateBrochure = () => {
 
     // Simulate processing time
     await new Promise(resolve => setTimeout(resolve, 3000));
+
+    const productDetails = {
+      "name": "Hand-carved Olive Wood Bowl",
+      "description": "Beautifully crafted bowl made from sustainable olive wood",
+      "materials": ["Olive wood"],
+      "price": 65.00,
+      "dimensions": "8 inches x 3 inches"
+    };
+    
+    const artisanName = "Rakesh Kumar";
+    const location = "Madhya Pradesh, India";
+
+    // const res = await axios.post("/api/brochure", {
+    //   productDetails,
+    //   artisanName,
+    //   location
+    // });
+
+    // if (res.status === 200) {
+    //   console.log("Brochure created successfully");
+    // } else {
+    //   console.error("Error creating brochure");
+    // }
 
     // Generate random ID for demo
     const dummyId = Math.random().toString(36).substr(2, 9);
@@ -56,7 +80,7 @@ const CreateBrochure = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-950 text-white rounded-lg hover:bg-blue-600"
             >
               <Upload size={20} />
               Add Files

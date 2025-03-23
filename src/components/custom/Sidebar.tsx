@@ -35,7 +35,7 @@ export default function Sidebar() {
     // },
     {
       title: "WORKSHOP",
-      url: "/artisan/workshop/all",
+      url: "/artisan/workshop/list",
       icon: Settings,
       regex: /^\/workshop(?:\/.*)?$/,
     },

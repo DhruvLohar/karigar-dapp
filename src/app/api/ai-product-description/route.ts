@@ -38,8 +38,16 @@ export async function POST(request: NextRequest) {
       ]
     });
 
-    // Extract the text content from the response
-    const content = response.content[0].text;
+    // Extract the text content from the response, handling different content types
+    let content = '';
+    if (response.content && response.content.length > 0) {
+      const firstContent = response.content[0];
+      if (typeof firstContent === 'object' && 'type' in firstContent) {
+        if (firstContent.type === 'text') {
+          content = firstContent.text;
+        }
+      }
+    }
 
     return NextResponse.json({ description: content });
   } catch (error: any) {

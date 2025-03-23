@@ -172,9 +172,7 @@ interface ProductCollageProps {
   products: Product[];
 }
 
-export default function ArtisanProfile({ params }: PageProps) {
-  const title = decodeURIComponent(params.id);
-  const description = artisanInfo.find((artisan) => artisan.title === title);
+export default function KarigarProfile({ params }: PageProps) {
 
   const mukeshChauhanData = {
     title: "Mukesh Chauhan",
@@ -210,9 +208,10 @@ export default function ArtisanProfile({ params }: PageProps) {
             Mukesh Chauhan
           </h1>
           <p className="text-gray-600 mb-4 max-w-2xl mx-auto">
-            Lorem ipsum dolor sit amet consectetur. Potenti mi facilisis at alid
-            quam venenatis scds scelerisque ut. Tempus nunc venena sasstis
-            feugiat et risus tristique at. Turpis ut.
+            Dedicated artisan with years of experience in traditional craftsmanship.
+            Specializing in creating unique handmade pieces that blend traditional
+            techniques with contemporary designs. Committed to preserving and promoting
+            India's rich cultural heritage through my work.
           </p>
           <div className="flex items-center justify-center text-sm text-gray-500 mb-4">
             <MapPin className="h-4 w-4 mr-1" />
@@ -267,13 +266,20 @@ export default function ArtisanProfile({ params }: PageProps) {
                 <h2 className="text-2xl font-bold mb-4 text-gray-900">
                   About me
                 </h2>
-                <p className="mb-4 text-gray-700">Hi guys!</p>
+                <p className="mb-4 text-gray-700">Namaste! Welcome to my Profile!</p>
                 <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Curabitur lacinia tellus ante, viverra cursus mauris
-                  condimentum sed. Nulla rhoncus, lacus et condimentum eleifend,
-                  augue turpis cursus mi, id vehicula massa velit non dolor. In
-                  nec ante turpis.
+                  With over a decade of experience in traditional craftsmanship, I take pride
+                  in creating authentic handcrafted pieces that tell a story. My work combines
+                  age-old techniques passed down through generations with innovative approaches
+                  to meet modern preferences. Each piece is carefully crafted with attention
+                  to detail and a commitment to quality.
+                </p>
+                <p className="text-gray-600">
+                  I specialize in working with local materials and sustainable practices,
+                  ensuring that every creation not only reflects our cultural heritage but
+                  also contributes to the preservation of traditional art forms. Through my
+                  work, I aim to connect global audiences with India's rich artisanal
+                  traditions while creating unique pieces that bring joy to their owners.
                 </p>
                 <h2 className="text-2xl font-bold mt-8 mb-4 text-gray-900">
                   Products
@@ -299,21 +305,21 @@ export default function ArtisanProfile({ params }: PageProps) {
                         className="w-full justify-start bg-transparent border-white text-white hover:bg-white/10"
                       >
                         <Instagram className="mr-2 h-4 w-4" />
-                        John Doe
+                        Mukesh Chauhan
                       </Button>
                       <Button
                         variant="outline"
                         className="w-full justify-start bg-transparent border-white text-white hover:bg-white/10"
                       >
                         <Facebook className="mr-2 h-4 w-4" />
-                        John Doe
+                        Mukesh Chauhan
                       </Button>
                       <Button
                         variant="outline"
                         className="w-full justify-start bg-transparent border-white text-white hover:bg-white/10"
                       >
                         <Mail className="mr-2 h-4 w-4" />
-                        JohnDoe@gmail.com
+                        Mukesh@gmail.com
                       </Button>
                     </div>
                   </CardContent>
@@ -395,8 +401,8 @@ export default function ArtisanProfile({ params }: PageProps) {
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-slate-200 rounded-full mr-4"></div>
                     <div>
-                      <h4 className="font-semibold">Mr. John Doe</h4>
-                      <p className="text-sm text-gray-500">Total Spent: $123</p>
+                      <h4 className="font-semibold">Mr Ravi Jain</h4>
+                      <p className="text-sm text-gray-500">Total Spent: ₹1,23,000</p>
                       <p className="text-sm text-gray-500">Total Reviews: 14</p>
                     </div>
                   </div>

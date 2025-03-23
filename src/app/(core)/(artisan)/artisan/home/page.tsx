@@ -13,6 +13,7 @@ import {
   MessageCircle,
   Sparkles,
   LineChart,
+  Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,11 +21,15 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
+  CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ImageCollage from "@/components/custom/ImageCollage";
 import ChatBotModal from "@/components/custom/ChatBotModal";
+import QuickLink from "@/components/custom/artisan/QuickLink";
+import ArtisanCalendar from "@/components/custom/artisan/ArtisanCalendar";
+import { PendingOrders } from "@/components/custom/artisan/PendingOrders";
 
 export default function ArtisanHomePage() {
   const userBookings = [
@@ -108,6 +113,102 @@ export default function ArtisanHomePage() {
     },
   ];
 
+  // Sample events - in a real application, these would come from your database
+  const events = [
+    {
+      id: 1,
+      title: "Craft Fair",
+      date: new Date(2023, 3, 15), // April 15, 2023
+      location: "Delhi Exhibition Center",
+    },
+    {
+      id: 2,
+      title: "Workshop",
+      date: new Date(2023, 3, 20), // April 20, 2023
+      location: "Community Center",
+    },
+    {
+      id: 3,
+      title: "Online Showcase",
+      date: new Date(2023, 4, 5), // May 5, 2023
+      location: "Virtual",
+    },
+  ];
+
+  // Sample stats - to be replaced with real data
+  const stats = [
+    {
+      title: "Total Orders",
+      value: "42",
+      icon: <ShoppingBag className="h-6 w-6 text-dori/70" />,
+    },
+    {
+      title: "Monthly Revenue",
+      value: "₹12,500",
+      icon: <Tag className="h-6 w-6 text-dori/70" />,
+    },
+    {
+      title: "Shop Visitors",
+      value: "256",
+      icon: <Users className="h-6 w-6 text-dori/70" />,
+    },
+    {
+      title: "Avg. Delivery Time",
+      value: "3 days",
+      icon: <Clock className="h-6 w-6 text-dori/70" />,
+    },
+  ];
+
+  // Sample workshops - to be replaced with real data
+  const workshops = [
+    {
+      id: 1,
+      title: "Introduction to Block Printing",
+      date: "April 15, 2023",
+      participants: 8,
+      maxParticipants: 15,
+    },
+    {
+      id: 2,
+      title: "Advanced Pottery Techniques",
+      date: "April 22, 2023",
+      participants: 12,
+      maxParticipants: 12,
+    },
+    {
+      id: 3,
+      title: "Traditional Textile Weaving",
+      date: "May 5, 2023",
+      participants: 6,
+      maxParticipants: 10,
+    },
+  ];
+
+  // Sample customers - to be replaced with real data
+  const customers = [
+    {
+      id: 1,
+      name: "Rajiv Sharma",
+      location: "Mumbai",
+      totalOrders: 7,
+      totalSpent: "₹8,250",
+    },
+    {
+      id: 2,
+      name: "Ananya Patel",
+      location: "Bengaluru",
+      totalOrders: 5,
+      totalSpent: "₹6,100",
+    },
+    {
+      id: 3,
+      name: "Vikram Mehta",
+      location: "Delhi",
+      totalOrders: 3,
+      totalSpent: "₹4,500",
+    },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-8 ">
       <h1 className="text-3xl font-bold mb-8 text-dori">Welcome, Artisan!</h1>
@@ -145,176 +246,146 @@ export default function ArtisanHomePage() {
         </div>
       </section>
 
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4  text-dori/80">
-          Your Upcoming Workshops
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {userBookings.map((booking, index) => (
-            <div
-              key={index}
-              className="bg-white p-4 rounded-lg shadow flex items-center justify-between"
-            >
-              <div>
-                <h4 className="font-semibold mb-2 text-[#1A2B4A]">
-                  {booking.title}
-                </h4>
-                <p className="text-sm text-gray-600 flex items-center mb-1">
-                  <CalendarDays className="w-4 h-4 mr-1" />
-                  {booking.date}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {booking.daysLeft} Days Left
-                </p>
-              </div>
-              <Button
-                variant="outline"
-                className="bg-blue-950 text-white hover:bg-blue-950/90"
-              >
-                View Details
-              </Button>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <section>
+          <h2 className="text-2xl font-semibold mb-4 text-dori/80">
+            Order Summary
+          </h2>
+          <PendingOrders />
+        </section>
 
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 text-dori/80">
-          Featured Workshops
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredWorkshops.map((workshop, index) => (
-            <Card
-              key={index}
-              className="h-full bg-white shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <CardContent className="p-0">
-                <ImageCollage individualCardData={workshop} />
-                <div className="p-4">
-                  <CardTitle className="text-lg font-semibold text-[#1A2B4A] mb-2">
-                    {workshop.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-gray-600 mb-4">
-                    {workshop.description.length > 80
-                      ? `${workshop.description.substring(0, 80)}...`
-                      : workshop.description}
-                  </CardDescription>
-                  <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 mb-4">
-                    <div className="flex items-center">
-                      <MapPin size={14} className="mr-1 flex-shrink-0" />
-                      <span className="truncate">
-                        {workshop.address.split(",")[0]}
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <Calendar size={14} className="mr-1 flex-shrink-0" />
-                      <span className="truncate">{workshop.date}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Clock size={14} className="mr-1 flex-shrink-0" />
-                      <span>4 hours</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Users size={14} className="mr-1 flex-shrink-0" />
-                      <span className="truncate">{workshop.organizer}</span>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center">
-                      <Tag size={14} className="mr-1 text-dori flex-shrink-0" />
-                      <span className="font-semibold text-dori text-sm">
-                        {workshop.price === 0 ? "Free" : `₹${workshop.price}`}
-                      </span>
-                    </div>
-                    <Button
-                      variant="outline"
-                      className="bg-blue-950 text-white hover:bg-blue-950/90 text-xs px-2 py-1"
-                    >
-                      Learn More
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="px-4 py-3 bg-gray-50">
-                <div className="flex flex-wrap gap-1">
-                  {workshop.tags.slice(0, 3).map((badge, index) => (
-                    <Badge
-                      key={index}
-                      className="px-1.5 py-0.5 text-[10px] bg-blue-950/20 text-dori hover:bg-blue-950/40 hover:text-white"
-                    >
-                      {badge}
-                    </Badge>
-                  ))}
-                </div>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4 text-dori/80">
+            Upcoming Events
+          </h2>
+          <ArtisanCalendar />
+        </section>
+      </div>
 
-      <section>
+      <section className="mt-12">
         <h2 className="text-2xl font-semibold mb-4 text-dori/80">
-          Featured Rental Machines
+          Performance Stats
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredMachines.map((machine) => (
-            <Card
-              key={machine.id}
-              className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {stats.map((stat, index) => (
+            <Card key={index} className="bg-white border-dori/10">
               <CardContent className="p-4">
-                <img
-                  src={machine.imageUrl}
-                  alt={machine.name}
-                  className="w-full h-48 object-cover mb-4 rounded"
-                />
-                <CardTitle className="text-lg font-semibold text-[#1A2B4A] mb-2">
-                  {machine.name}
-                </CardTitle>
-                <CardDescription className="text-sm text-gray-600 mb-4">
-                  {machine.description}
-                </CardDescription>
-                <div className="flex justify-between items-center mb-4">
-                  <div className="flex items-center text-sm text-gray-500">
-                    <MapPin size={14} className="mr-1" />
-                    {machine.location}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground">{stat.title}</p>
+                    <p className="text-2xl font-bold text-dori">{stat.value}</p>
                   </div>
-                  <div className="font-semibold text-dori">
-                    ₹{machine.price}/day
-                  </div>
+                  <div className="p-2 rounded-full bg-dori/10">{stat.icon}</div>
                 </div>
-                <Button className="w-full bg-blue-950 text-white hover:bg-blue-950/90">
-                  Rent Now
-                </Button>
               </CardContent>
-              <CardFooter className="px-4 py-3 bg-gray-50">
-                <div className="flex flex-wrap gap-1">
-                  {machine.tags.map((tag, index) => (
-                    <Badge
-                      key={index}
-                      className="px-1.5 py-0.5 text-[10px] bg-blue-950/20 text-dori hover:bg-blue-950/40 hover:text-white"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardFooter>
             </Card>
           ))}
         </div>
       </section>
-    </div>
-  );
-}
 
-function QuickLink({ href, children, icon }: { href: string; children: React.ReactNode; icon: React.ReactNode }) {
-  return (
-    <Link
-      href={href}
-      className="flex items-center bg-white text-[#1A2B4A] px-4 py-3 rounded-lg shadow hover:bg-gray-50 transition-colors"
-    >
-      {icon && <span className="mr-2">{icon}</span>}
-      {children}
-    </Link>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+        <section>
+          <h2 className="text-2xl font-semibold mb-4 text-dori/80">
+            Your Workshops
+          </h2>
+          <Card className="bg-white border-dori/10">
+            <CardContent className="p-4">
+              {workshops.length > 0 ? (
+                <div className="space-y-4">
+                  {workshops.map((workshop) => (
+                    <div
+                      key={workshop.id}
+                      className="flex items-center justify-between border-b border-dori/10 pb-2 last:border-0 last:pb-0"
+                    >
+                      <div>
+                        <p className="font-medium text-dori">{workshop.title}</p>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Calendar className="mr-1 h-3 w-3" />
+                          {workshop.date}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-muted-foreground">
+                          {workshop.participants}/{workshop.maxParticipants}{" "}
+                          participants
+                        </p>
+                        <div className="w-24 h-2 bg-dori/10 rounded-full mt-1">
+                          <div
+                            className="h-2 bg-dori rounded-full"
+                            style={{
+                              width: `${(workshop.participants / workshop.maxParticipants) * 100}%`,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center py-4 text-muted-foreground">
+                  No workshops scheduled
+                </p>
+              )}
+            </CardContent>
+            <CardFooter className="bg-dori/5 px-4 py-2">
+              <Link
+                href="/artisan/workshop/list"
+                className="text-dori hover:underline text-sm w-full text-center"
+              >
+                View All Workshops
+              </Link>
+            </CardFooter>
+          </Card>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-4 text-dori/80">
+            Top Customers
+          </h2>
+          <Card className="bg-white border-dori/10">
+            <CardContent className="p-4">
+              {customers.length > 0 ? (
+                <div className="space-y-4">
+                  {customers.map((customer) => (
+                    <div
+                      key={customer.id}
+                      className="flex items-center justify-between border-b border-dori/10 pb-2 last:border-0 last:pb-0"
+                    >
+                      <div>
+                        <p className="font-medium text-dori">{customer.name}</p>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <MapPin className="mr-1 h-3 w-3" />
+                          {customer.location}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium text-dori">
+                          {customer.totalSpent}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {customer.totalOrders} orders
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-center py-4 text-muted-foreground">
+                  No customer data available
+                </p>
+              )}
+            </CardContent>
+            <CardFooter className="bg-dori/5 px-4 py-2">
+              <Link
+                href="/artisan/customers"
+                className="text-dori hover:underline text-sm w-full text-center"
+              >
+                View All Customers
+              </Link>
+            </CardFooter>
+          </Card>
+        </section>
+      </div>
+    </div>
   );
 }

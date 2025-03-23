@@ -3,7 +3,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 // Initialize Anthropic client
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY ,
+  apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
 export async function POST(request: NextRequest) {
@@ -19,8 +19,19 @@ export async function POST(request: NextRequest) {
       ]
     });
 
+    // Extract content handling different content types
+    let content = '';
+    if (response.content && response.content.length > 0) {
+      const firstContent = response.content[0];
+      if (typeof firstContent === 'object' && 'type' in firstContent) {
+        if (firstContent.type === 'text') {
+          content = firstContent.text;
+        }
+      }
+    }
+
     return NextResponse.json({ 
-      content: response.content[0].text,
+      content: content,
       id: response.id,
       model: response.model
     });

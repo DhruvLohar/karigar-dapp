@@ -52,11 +52,12 @@ const dummyAIResponse = {
 }
 
 interface WorkshopTimelineProps {
+  workshopData?: any
   onBack: () => void
   onCreateWorkshop: () => void
 }
 
-export function WorkshopTimeline({ onBack, onCreateWorkshop }: WorkshopTimelineProps) {
+export function WorkshopTimeline({ onBack, onCreateWorkshop, workshopData=dummyAIResponse }: WorkshopTimelineProps) {
   return (
     <div className="space-y-8">
       <div className="flex items-center space-x-2">
@@ -74,7 +75,7 @@ export function WorkshopTimeline({ onBack, onCreateWorkshop }: WorkshopTimelineP
           </CardHeader>
           <CardContent>
             <div className="space-y-8">
-              {dummyAIResponse.steps.map((step, index) => (
+              {workshopData.steps.map((step: any, index: number) => (
                 <div key={index} className="relative pl-8 pb-8">
                   {index !== dummyAIResponse.steps.length - 1 && (
                     <div className="absolute top-0 left-3 h-full w-px bg-gray-200"></div>
@@ -90,7 +91,7 @@ export function WorkshopTimeline({ onBack, onCreateWorkshop }: WorkshopTimelineP
                     <h3 className="text-lg font-medium">{step.title}</h3>
                     <p className="text-gray-600">{step.description}</p>
                     <ul className="list-disc pl-5 text-gray-600 text-sm space-y-1">
-                      {step.tasks.map((task, idx) => (
+                      {step.tasks.map((task: any, idx: number) => (
                         <li key={idx}>{task}</li>
                       ))}
                     </ul>

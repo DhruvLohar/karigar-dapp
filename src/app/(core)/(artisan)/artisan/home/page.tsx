@@ -11,6 +11,8 @@ import {
   Clock,
   BookImage,
   MessageCircle,
+  Sparkles,
+  LineChart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -127,6 +129,18 @@ export default function ArtisanHomePage() {
             icon={<School />}
           >
             Initiate Workshop
+          </QuickLink>
+          <QuickLink 
+            href="/artisan/ai-product-description" 
+            icon={<Sparkles />}
+          >
+            AI Product Description
+          </QuickLink>
+          <QuickLink 
+            href="/artisan/ai-marketing-planner" 
+            icon={<LineChart />}
+          >
+            AI Marketing Planner
           </QuickLink>
         </div>
       </section>

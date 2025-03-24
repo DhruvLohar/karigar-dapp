@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  buttons?: { text: string; link: string }[];
 }
 
 function ChatBotModal() {
@@ -93,14 +95,40 @@ function ChatBotModal() {
     setIsRecording(!isRecording);
   };
 
+  const handleSendMessage = async () => {
+    if (!inputValue.trim()) return;
+
+    const userMessage = inputValue.trim();
+    setMessages(prev => [...prev, { role: "user", content: userMessage }]);
+    setInputValue("");
+
+    // Check if user is asking about dashboard
+    if (userMessage.toLowerCase().includes("dashboard") || 
+        userMessage.toLowerCase().includes("route me to my dashboard")) {
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          role: "assistant",
+          content: "Sure! You can go to your dashboard by clicking the button below:",
+          buttons: [
+            {
+              text: "Go to Dashboard",
+              link: "/artisan/home"
+            }
+          ]
+        }]);
+      }, 500);
+    }
+    // Add other message handling logic here
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-sm border border-dori/10 hover:border-dori/40 hover:shadow-md transition-all w-full h-full">
-          <div className="p-3 mb-2 rounded-full bg-dori/10 text-dori">
-            <MessageCircle />
-          </div>
-          <span className="font-medium text-center">Chat with AI</span>
+        <Button 
+          className="fixed bottom-6 right-6 rounded-full w-14 h-14 p-0 bg-blue-950 hover:bg-blue-900 shadow-lg"
+          aria-label="Chat with AI"
+        >
+          <MessageCircle className="h-6 w-6 text-white" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -118,14 +146,27 @@ function ChatBotModal() {
           ) : (
             <div className="flex flex-col space-y-2">
               {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`max-w-[80%] p-3 text-sm rounded-lg shadow break-words ${msg.role === "user"
-                    ? "bg-blue-600 text-white ml-auto"
-                    : "bg-white text-black mr-auto border"
+                <div key={index}>
+                  <div
+                    className={`max-w-[80%] p-3 text-sm rounded-lg shadow break-words ${
+                      msg.role === "user"
+                        ? "bg-blue-600 text-white ml-auto"
+                        : "bg-white text-black mr-auto border"
                     }`}
-                >
-                  {msg.content}
+                  >
+                    {msg.content}
+                  </div>
+                  {msg.role === "assistant" && msg.buttons && (
+                    <div className="mt-2 ml-2">
+                      {msg.buttons.map((button, btnIndex) => (
+                        <Link key={btnIndex} href={button.link}>
+                          <Button className="bg-blue-950 text-white hover:bg-blue-900">
+                            {button.text}
+                          </Button>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
               <div ref={messagesEndRef} />
@@ -138,8 +179,18 @@ function ChatBotModal() {
             placeholder="Type your message..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSendMessage();
+              }
+            }}
           />
-          <Button className="rounded-l-none">Send</Button>
+          <Button 
+            className="rounded-l-none bg-blue-950 hover:bg-blue-900"
+            onClick={handleSendMessage}
+          >
+            Send
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

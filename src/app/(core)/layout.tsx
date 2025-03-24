@@ -5,6 +5,7 @@ import Navbar from "@/components/custom/Navbar";
 import Footer from "@/components/custom/Footer";
 import SmoothScroll from "@/components/custom/SmoothScroll";
 import { ToastContainer } from "@/components/ui/use-toast";
+import ChatBotModal from "@/components/custom/ChatBotModal";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -29,6 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Footer />
             </>
           )}
+          <ChatBotModal />
         </div>
       </SmoothScroll>
     </ToastContainer>
